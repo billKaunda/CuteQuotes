@@ -1,0 +1,8 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Map<String, dynamic> _$SignInRequestRMToJson(SignInRequestRM instance) =>
+    <String, dynamic>{
+      'user': instance.credentials,
+    };

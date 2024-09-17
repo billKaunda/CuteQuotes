@@ -1,0 +1,8 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Map<String, dynamic> _$SignUpRequestRMToJson(SignUpRequestRM instance) =>
+    <String, dynamic>{
+      'user': instance.user,
+    };

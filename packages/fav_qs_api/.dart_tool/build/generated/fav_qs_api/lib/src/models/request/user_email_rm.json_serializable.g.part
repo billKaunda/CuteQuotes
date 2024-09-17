@@ -1,0 +1,8 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Map<String, dynamic> _$UserEmailRMToJson(UserEmailRM instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+    };

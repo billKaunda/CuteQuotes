@@ -1,0 +1,10 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+QuoteUserInfoRM _$QuoteUserInfoRMFromJson(Map<String, dynamic> json) =>
+    QuoteUserInfoRM(
+      isFavorite: json['favorite'] as bool,
+      isUpvoted: json['isUpvoted'] as bool,
+      isDownvoted: json['isDownVoted'] as bool,
+    );

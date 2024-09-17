@@ -1,0 +1,9 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+UserRM _$UserRMFromJson(Map<String, dynamic> json) => UserRM(
+      token: json['User-Token'] as String,
+      username: json['login'] as String,
+      email: json['email'] as String,
+    );

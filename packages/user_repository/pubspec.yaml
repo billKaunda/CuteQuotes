@@ -1,0 +1,23 @@
+name: user_repository
+publish_to: none
+
+environment:
+  sdk: '>=3.4.0-190.1.beta <4.0.0'
+
+dependencies:
+  fav_qs_api:
+    path: ../fav_qs_api
+  key_value_storage:
+    path: ../key_value_storage
+  domain_models:
+    path: ../domain_models
+  rxdart: ^0.28.0
+  flutter_secure_storage: ^4.2.1
+  meta: ^1.12.0
+
+dev_dependencies:
+  test: ^1.25.2
+  mockito: ^5.4.4
+  lints: ^4.0.0
+  build_runner: ^2.4.9
+

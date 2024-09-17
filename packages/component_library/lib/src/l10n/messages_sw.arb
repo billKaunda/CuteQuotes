@@ -1,0 +1,13 @@
+{
+    "downvoteIconButtonTooltip" : "Kura ya Chini",
+    "upvoteIconButtonTooltip" : "Kura ya Juu",
+    "searchBarHintText" : "Zuru",
+    "searchBarLabelText" : "Tafuta",
+    "shareIconButtonTooltip" : "Shiriki",
+    "favoriteIconButtonTooltip" : "Kipendwa",
+    "exceptionIndicatorGenericTitle" : "Samahani, kuna jambo lililokwenda mrama",
+    "exceptionIndicatorTryAgainButton" : "Jaribu tena",
+    "exceptionIndicatorGenericMessage" : "Kumekuwa na hitilafu.\nTafadhali, angalia muunganisho wako wa intaneti kisha ujaribu tena.",
+    "genericErrorSnackBarMessage" : "Hitifalu imetokea. Angali muunganisho wako wa intaneti",
+    "authenticationRequiredErrorSnackBarMessage" : "Ili kutekeleza kitendo hiki, ingia kwa huruma."
+}

@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CuteQuotes",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define",
+                "fav-qs-app-token=d85fb63483723cad2de23a431f0305b6"
+            ]
+        },
+        /*
+        {
+            "name": "cutequotes (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "cutequotes (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "fav_qs_api",
+            "cwd": "packages/fav_qs_api",
+            "request": "launch",
+            "type": "dart"
+        }
+        */
+    ]
+}

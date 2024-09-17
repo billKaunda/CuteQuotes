@@ -1,0 +1,13 @@
+name: form_fields
+publish_to: none
+
+environment:
+  sdk: '>=3.4.0-190.1.beta <4.0.0'
+
+dependencies:
+  equatable: ^2.0.5
+  formz: ^0.7.0
+
+dev_dependencies:
+  test: ^1.25.2
+  lints: ^4.0.0

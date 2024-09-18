@@ -1,0 +1,16 @@
+{
+    "appBarTitle" : "Update Profile",
+    "updateProfileButtonLabel" : "Update",
+    "usernameTextFieldLabel" : "Username",
+    "usernameTextFieldEmptyErrorMessage" : "Your username can't be empty.",
+    "usernameTextFieldAlreadyTakenErrorMessage" : "This username exists. Choose another.",
+    "usernameTextFieldInvalidErrorMessage" : "Your username must be 1-20 characters long, and can only contain letters, numbers, and the underscore(_).",
+    "emailTextFieldLabel" : "Email",
+    "emailTextFieldEmptyErrorMessage" : "Your email can't be empty.",
+    "emailTextFieldAlreadyRegisteredErrorMessage" : "This email is already registered with us.",
+    "emailTextFieldInvalidErrorMessage" : "This email is not valid.",
+    "passwordTextFieldLabel" : "New Password",
+    "passwordTextFieldInvalidErrorMessage" : " Password must be at least 5 characters long.",
+    "passwordConfirmationTextFieldLabel" : "New Password confirmation.",
+    "passwordConfirmationTextFieldInvalidErrorMessage" : "Your passwords don't match."
+}

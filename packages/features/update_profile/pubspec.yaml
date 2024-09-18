@@ -1,0 +1,30 @@
+name: update_profile
+publish_to: none
+
+environment:
+  sdk: '>=3.4.0-190.1.beta <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  component_library:
+    path: ../../component_library
+  user_repository:
+    path: ../../user_repository
+  form_fields:
+    path: ../../form_fields
+  domain_models:
+    path: ../../domain_models
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test: ^1.25.2
+  bloc_test: ^9.1.7
+  mockito: ^5.4.4
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

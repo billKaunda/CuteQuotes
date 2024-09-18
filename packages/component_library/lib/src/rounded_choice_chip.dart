@@ -25,7 +25,7 @@ class RoundedChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = WonderTheme.of(context);
+    final theme = CuteTheme.of(context);
     return ChoiceChip(
       shape: const StadiumBorder(
         side: BorderSide(),

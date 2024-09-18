@@ -6,7 +6,7 @@ const _dividerThemeData = DividerThemeData(space: 0);
 //If the number of properties gets too big, we can start grouping
 // them in classes like Flutter does with TextTheme, ButtonTheme, e.t.c
 
-abstract class WonderThemeData {
+abstract class CuteThemeData {
   ThemeMode get materialThemeMode;
 
   ThemeData get materialThemeData;
@@ -39,7 +39,7 @@ abstract class WonderThemeData {
   );
 }
 
-class LightWonderThemeData extends WonderThemeData {
+class LightCuteThemeData extends CuteThemeData {
   @override
   ThemeMode get materialThemeMode => ThemeMode.light;
 
@@ -78,7 +78,7 @@ class LightWonderThemeData extends WonderThemeData {
   Color get votedButtonColor => Colors.black;
 }
 
-class DarkWonderThemeData extends WonderThemeData {
+class DarkCuteThemeData extends CuteThemeData {
   @override
   ThemeMode get materialThemeMode => ThemeMode.dark;
 

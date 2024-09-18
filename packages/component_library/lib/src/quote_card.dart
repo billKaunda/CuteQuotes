@@ -25,7 +25,7 @@ class QuoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final top = this.top;
     final bottom = this.bottom;
-    final theme = WonderTheme.of(context);
+    final theme = CuteTheme.of(context);
     final author = this.author;
     return Card(
       margin: const EdgeInsets.all(0),

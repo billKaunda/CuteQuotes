@@ -16,7 +16,7 @@ class UpvoteIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = ComponentLibraryLocalizations.of(context);
-    final theme = WonderTheme.of(context);
+    final theme = CuteTheme.of(context);
 
     return CountIndicatorIconButton(
       count: count,

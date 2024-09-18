@@ -1,8 +1,8 @@
 export 'src/l10n/component_library_localizations.dart';
 export 'src/theme/font_size.dart';
 export 'src/theme/spacing.dart';
-export 'src/theme/wonder_theme.dart';
-export 'src/theme/wonder_theme_data.dart';
+export 'src/theme/cute_theme.dart';
+export 'src/theme/cute_theme_data.dart';
 export 'src/authentication_required_error_snack_bar.dart';
 export 'src/centered_circular_progress_indicator.dart';
 export 'src/chevron_list_tile.dart';

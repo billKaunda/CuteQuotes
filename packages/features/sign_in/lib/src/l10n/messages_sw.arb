@@ -1,0 +1,14 @@
+{
+    "invalidCredentialsErrorMessage" : "Barua pepe na/au nenosiri si sahihi.",
+    "appBarTitle" : "Weka sahihi",
+    "emailTextFieldLabel" : "Barua Pepe",
+    "emailTextFieldEmptyErrorMessage" : "Barua pepe yako haiwezi kuwa tupu.",
+    "emailTextFieldInvalidErrorMessage" : "Barua pepe yako si sahihi.",
+    "passwordTextFieldLabel" : "Nenosiri",
+    "passwordTextFieldEmptyErrorMessage" : "Nenosiri lako haliwezi kuwa tupu.",
+    "passwordTextFieldInvalidErrorMessage" : "Nenosiri lazima liwe na urefu wa angalau vibambo 5.",
+    "forgotMyPasswordButtonLabel" : "Nimesahau nenosiri langu",
+    "signInButtonLabel" : "Weka sahihi",
+    "signUpOpeningText" : "Je, huna akaunti? Bonyeza hapa.",
+    "signUpButtonLabel" : "Jisajili"
+}

@@ -1,0 +1,19 @@
+{
+    "invalidCredentialsErrorMessage" : "Barua pepe na/au nenosiri si sahihi",
+    "appBarTitle" : "Jiandikishe",
+    "signUpButtonLabel" : "Jisandikishe",
+    "usernameTextFieldLabel" : "Jina la mtumiaji",
+    "usernameTextFieldEmptyErrorMessage" : "Jina lako la mtumiaji haliwezi kuwa tupu",
+    "usernameTextFieldInvalidErrorMessage" : "Jina la mtumiaji linaweza kuwa na urefu wa vibambo 1-20 pekee, na linaweza kuwa na herufi, nambari, na alama ya chini pekee.",
+    "usernameTextFieldAlreadyTakenErrorMessage" : "Jina hili la mtumiaji tayari limechukuliwa.",
+    "emailTextFieldLabel" : "Barua Pepe",
+    "emailTextFieldEmptyErrorMessage" : "Barua pepe yako haiwezi kuwa tupu.",
+    "emailTextFieldInvalidErrorMessage" : "Barua pepe hii si sahihi.",
+    "emailTextFieldAlreadyRegisteredErrorMessage" : "Samahani, barua pepe hii tayari imesajiliwa nasi.",
+    "passwordTextFieldLabel" : "Nenosiri",
+    "passwordTextFieldEmptyErrorMessage" : "Nenosiri lako haliwezi kuwa tupu.",
+    "passwordTextFieldInvalidErrorMessage" : "Nenosiri lazima liwe na urefu wa angalau vibambo 5.",
+    "passwordConfirmationTextFieldLabel" : "Uthibitishaji wa Nenosiri",
+    "passwordConfirmationTextFieldEmptyErrorMessage" : "Sehemu hii haiwezi kuwa tupu.",
+    "passwordConfirmationTextFieldInvalidErrorMessage" : "Nenosiri lako halilingani."
+}

@@ -1,0 +1,19 @@
+{
+    "invalidCredentialsErrorMessage" : "Invalid email and/or password.",
+    "appBarTitle" : "Sign Up",
+    "signUpButtonLabel" : "Sign Up",
+    "usernameTextFieldLabel" : "Username",
+    "usernameTextFieldEmptyErrorMessage" : "Your username can't be empty",
+    "usernameTextFieldInvalidErrorMessage" : "Username can only be 1-20 characters long, and can contain letters, numbers, and the underscore only.",
+    "usernameTextFieldAlreadyTakenErrorMessage" : "This username is already taken.",
+    "emailTextFieldLabel" : "Email",
+    "emailTextFieldEmptyErrorMessage" : "Your email can't be empty.",
+    "emailTextFieldInvalidErrorMessage" : "This email address is not valid.",
+    "emailTextFieldAlreadyRegisteredErrorMessage" : "Sorry, this email is already registered with us.",
+    "passwordTextFieldLabel" : "Password",
+    "passwordTextFieldEmptyErrorMessage" : "Your password can't be empty.",
+    "passwordTextFieldInvalidErrorMessage" : "Password must be at least 5 characters long.",
+    "passwordConfirmationTextFieldLabel" : "Password Confirmation",
+    "passwordConfirmationTextFieldEmptyErrorMessage" : "This field can't be emtpy.",
+    "passwordConfirmationTextFieldInvalidErrorMessage" : "Your password don't match."
+}

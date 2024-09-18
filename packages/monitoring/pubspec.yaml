@@ -5,17 +5,18 @@ environment:
   sdk: '>=3.4.0-190.1.beta <4.0.0'
 
 dependencies:
+  flutter: 
+    sdk: flutter
   cloud_firestore: ^3.2.0
   firebase_analytics: ^9.1.11
-  firebase_auth: ^3.4.0
+  #firebase_auth: ^3.4.0
   firebase_core: ^1.19.0
   firebase_crashlytics: ^2.8.3
   firebase_dynamic_links: ^4.3.0 #has been discontinued
   firebase_dynamic_links_platform_interface: ^0.2.3+13
   firebase_remote_config: ^2.0.10
-  flutter: 
-    sdk: flutter
-  lints: ^4.0.0
+  #firebase_auth_web: ^3.3.18
 
 dev_dependencies:
   test: ^1.25.2
+  lints: ^4.0.0

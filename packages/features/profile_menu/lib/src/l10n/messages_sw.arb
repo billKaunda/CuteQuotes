@@ -1,0 +1,19 @@
+{
+    "signInButtonLabel" : "Weka Sahihi",
+    "signInUserGreeting" : "Hujambo {username} ",
+    "@signInUserGreeting" : {
+        "placeholders" : {
+            "username" : {
+                "type" : "String"
+            }
+        }
+    },
+    "updateProfileTileLabel" : "Sasisha Wasifu",
+    "darkModePreferencesHeaderTileLabel" : "Upendeleo wa Hali ya Giza",
+    "darkModePreferencesAlwaysDarkTileLabel" : "Giza ",
+    "darkModePreferencesAlwaysLightTileLabel" : "Mwanga",
+    "darkModePreferencesUseSystemSettingsTileLabel" : "Tumia Mipangilio ya Mfumo",
+    "signOutButtonLabel" : "Toka",
+    "signUpOpeningText" : "Je, huna akaunti?",
+    "signUpButtonLabel" : "Jisajili"
+}

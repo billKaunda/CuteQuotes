@@ -1,20 +1,24 @@
-name: forgot_my_password
+name: profile_menu
 publish_to: none
 
 environment:
-  sdk: ">=3.4.0-190.1.beta <4.0.0"
+  sdk: '>=3.4.0-190.1.beta <4.0.0'
 
 dependencies:
-  flutter: 
+  flutter:
     sdk: flutter
   component_library:
     path: ../../component_library
   user_repository:
     path: ../../user_repository
-  form_fields:
-    path: ../../form_fields
-  flutter_bloc: ^8.1.6
+  domain_models:
+    path: ../../domain_models
+  quote_repository:
+    path: ../../quote_repository
+  rxdart: ^0.28.0
   equatable: ^2.0.5
+  flutter_bloc: ^8.1.6
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

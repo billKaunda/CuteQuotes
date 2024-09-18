@@ -1,125 +1,241 @@
+import 'dart:async';
+import 'dart:isolate';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:routemaster/routemaster.dart';
+import 'package:component_library/component_library.dart';
+import 'package:domain_models/domain_models.dart';
+import 'package:fav_qs_api/fav_qs_api.dart';
+import 'package:forgot_my_password/forgot_my_password.dart';
+import 'package:profile_menu/profile_menu.dart';
+import 'package:quote_list/quote_list.dart';
+import 'package:sign_in/sign_in.dart';
+import 'package:sign_up/sign_up.dart';
+import 'package:update_profile/update_profile.dart';
+import 'package:key_value_storage/key_value_storage.dart';
+import 'package:monitoring/monitoring.dart';
+import 'package:quote_repository/quote_repository.dart';
+import 'package:user_repository/user_repository.dart';
+import 'package:cutequotes/routing_table.dart';
+import 'package:cutequotes/l10n/app_localizations.dart';
+import 'package:cutequotes/screen_view_observer.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  //Mark the ErrorReportingService as late and instantiate it so
+  //that it doesn't instantiate before initializeMonitoringPackage()
+  // call.
+  late final errorReportingService = ErrorReportingService();
+
+  //runZonedGuarded() method catches errors which are thrown when
+  // running an asynchronous code.
+  runZonedGuarded<Future<void>>(
+    () async {
+      //Ensure that Flutter is initialized. When initializing an app, the
+      // app interacts with its native layers through async operation. This
+      // happens via platform channels.
+      WidgetsFlutterBinding.ensureInitialized();
+
+      //Initialize Firebase core services, which are defined in the
+      // monitoring.dart file.
+      await initializeMonitoringPackage();
+
+      //Crash the app to test it with Firebase's Crashlytics
+      //final explicitCrash = ExplicitCrash();
+      //explicitCrash.crashTheApp();
+
+      //Initialize RemoteValueService and load feature flags from remote
+      // config.
+      final remoteValueService = RemoteValueService();
+      await remoteValueService.load();
+
+      //This lambda expression invokes the recordFlutterError method
+      // with the FlutterErrorDetails passed in its argument which
+      //holds the stacktrace, exception details, e.t.c.
+      FlutterError.onError = errorReportingService.recordFlutterError;
+
+      //This isolate function handles errors outside of Flutter context.
+      // Add a listener to the current isolate for additional error
+      // handling.
+      Isolate.current.addErrorListener(
+        RawReceivePort((pair) async {
+          //Extract error and stacktrace from the error listener
+          final List<dynamic> errorAndStackTrace = pair;
+          await errorReportingService.recordError(
+            errorAndStackTrace.first,
+            errorAndStackTrace.last,
+          );
+        }).sendPort,
+      );
+
+      HttpOverrides.global = WonderHttpOverrides();
+
+      //Run the app with the initialized services.
+      runApp(WonderWords(
+        remoteValueService: remoteValueService,
+      ));
+    },
+    //Handle errors caught in the zone-errors that happen asynchronously.
+    (error, stack) => errorReportingService.recordError(
+      error,
+      stack,
+      fatal: true,
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+class WonderHttpOverrides extends HttpOverrides {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
+class WonderWords extends StatefulWidget {
+  const WonderWords({
+    required this.remoteValueService,
+    super.key,
+  });
+  final RemoteValueService remoteValueService;
+
+  @override
+  State<WonderWords> createState() => _WonderWordsState();
+}
+
+class _WonderWordsState extends State<WonderWords> {
+  final _keyValueStorage = KeyValueStorage();
+  final _analyticsService = AnalyticsService();
+  //final _dynamicLinkService = DynamicLinkService();
+
+  late final UserRepository _userRepository;
+  late final FavQsApi _favQsApi;
+  late final QuoteRepository _quoteRepository;
+  late final RoutemasterDelegate _routerDelegate;
+
+  final _lightTheme = LightCuteThemeData();
+  final _darkTheme = DarkCuteThemeData();
+  late StreamSubscription _incomingDynamicLinkSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _favQsApi = FavQsApi(
+      userTokenSupplier: () => _userRepository.getToken(),
     );
-  }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+    _userRepository = UserRepository(
+      noSqlStorage: _keyValueStorage,
+      remoteApi: _favQsApi,
+    );
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+    _quoteRepository = QuoteRepository(
+      remoteApi: _favQsApi,
+      keyValueStorage: _keyValueStorage,
+    );
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    _routerDelegate = RoutemasterDelegate(
+      //Add observers to RoutemasterDelegate in order to track
+      // navigation from one screen to another
+      observers: [
+        ScreenViewObserver(
+          analyticsService: _analyticsService,
+        ),
+      ],
+      routesBuilder: (context) => RouteMap(
+        routes: buildRoutingTable(
+          routerDelegate: _routerDelegate,
+          userRepository: _userRepository,
+          quoteRepository: _quoteRepository,
+          remoteValueService: widget.remoteValueService,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+    
+    /*
+    //_openInitialDynamicLinkIfAny();
+    
+    ///Dynamic links is no longer supported
+    _incomingDynamicLinkSubscription =
+        _dynamicLinkService.onNewDynamicLinkPath().listen(
+              _routerDelegate.push,
+            );
+    */
+  }
+
+  /*
+  Future<void> _openInitialDynamicLinkIfAny() async {
+    final path = await _dynamicLinkService.getInitialDynamicLinkPath();
+    if (path != null) {
+      _routerDelegate.push(path);
+    }
+  }
+  */
+
+  @override
+  void dispose() {
+    _incomingDynamicLinkSubscription.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<DarkModePreference>(
+        stream: _userRepository.getDarkModePreference(),
+        builder: (context, snapshot) {
+          final darkModePreference = snapshot.data;
+
+          return CuteTheme(
+            lightTheme: _lightTheme,
+            darkTheme: _darkTheme,
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              routerDelegate: _routerDelegate,
+              routeInformationParser: const RoutemasterParser(),
+              theme: _lightTheme.materialThemeData,
+              darkTheme: _darkTheme.materialThemeData,
+              themeMode: darkModePreference?.toThemeMode(),
+              supportedLocales: const [
+                Locale('en', ''),
+                Locale('pt', 'BR'),
+                Locale('sw', 'KE'),
+                Locale('sw', 'UG'),
+                Locale('sw', 'TZ'),
+              ],
+              localizationsDelegates: const [
+                //The delegate property holds an object that knows how
+                // to create and recreate instances of a given localization,
+                // e.g, ComponentLibraryLocalizations based on the device's
+                // language.
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                AppLocalizations.delegate,
+                ComponentLibraryLocalizations.delegate,
+                ForgotMyPasswordLocalizations.delegate,
+                ProfileMenuLocalizations.delegate,
+                QuoteListLocalizations.delegate,
+                SignInLocalizations.delegate,
+                SignUpLocalizations.delegate,
+                UpdateProfileLocalizations.delegate,
+              ],
+            ),
+          );
+        });
+  }
+}
+
+extension on DarkModePreference {
+  ThemeMode toThemeMode() {
+    switch (this) {
+      case DarkModePreference.useSystemSettings:
+        return ThemeMode.system;
+      case DarkModePreference.alwaysLight:
+        return ThemeMode.light;
+      case DarkModePreference.alwaysDark:
+        return ThemeMode.dark;
+    }
   }
 }

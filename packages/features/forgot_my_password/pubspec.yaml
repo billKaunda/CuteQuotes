@@ -1,0 +1,24 @@
+name: forgot_my_password
+publish_to: none
+
+environment:
+  sdk: ">=3.4.0-190.1.beta <4.0.0"
+
+dependencies:
+  flutter: 
+    sdk: flutter
+  component_library:
+    path: ../../component_library
+  user_repository:
+    path: ../../user_repository
+  form_fields:
+    path: ../../form_fields
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  mocktail: ^1.0.4
+  flutter_lints: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  test: ^1.25.2

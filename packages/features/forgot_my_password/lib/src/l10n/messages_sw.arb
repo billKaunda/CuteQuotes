@@ -1,0 +1,10 @@
+{
+    "dialogTitle": "Nimesahau Nenosiri Langu",
+    "emailTextFieldLabel": "Barua Pepe",
+    "emailTextFieldEmptyErrorMessage" : "Barua pepe yako haiwezi kuwa tupu.",
+    "emailTextFieldInvalidErrorMessage" : "Barua pepe hii si sahihi.",
+    "emailRequestSuccessMessage" : "Ikiwa umesajili akaunti yako ya barua pepe nasi, kiungo kitatumwa kwako na maagizo ya jinsi ya kuweka upya nenosiri lako.",
+    "confirmButtonLabel" : "Thibitisha",
+    "cancelButtonLabel" : "Ghairi",
+    "errorMessage" : "Hitilafu imetokea, tafadhali angalia muungano wako wa mtandao."
+}

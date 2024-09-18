@@ -1,0 +1,28 @@
+name: quote_details
+publish_to: none
+
+environment:
+  sdk: '>=3.4.0-190.1.beta <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  component_library:
+    path: ../../component_library
+  quote_repository:
+    path: ../../quote_repository
+  domain_models:
+    path: ../../domain_models
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.6
+  share_plus: ^10.0.0
+  mocktail: ^1.0.4
+  test: ^1.25.2
+  flutter_lints: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true

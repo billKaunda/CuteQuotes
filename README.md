@@ -1,6 +1,6 @@
 # cutequotes
 
-A new Flutter project.
+Inspire yourself daily, anywhere with great quotes from all over the world
 
 ## Getting Started
 

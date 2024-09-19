@@ -67,7 +67,6 @@ void main() async {
             errorAndStackTrace.last,
           );
         }).sendPort,
-        
       );
 
       HttpOverrides.global = CuteHttpOverrides();
@@ -95,18 +94,18 @@ class CuteHttpOverrides extends HttpOverrides {
   }
 }
 
-class WonderWords extends StatefulWidget {
-  const WonderWords({
+class CuteQuotes extends StatefulWidget {
+  const CuteQuotes({
     required this.remoteValueService,
     super.key,
   });
   final RemoteValueService remoteValueService;
 
   @override
-  State<WonderWords> createState() => _WonderWordsState();
+  State<CuteQuotes> createState() => _CuteQuotesState();
 }
 
-class _WonderWordsState extends State<WonderWords> {
+class _CuteQuotesState extends State<CuteQuotes> {
   final _keyValueStorage = KeyValueStorage();
   final _analyticsService = AnalyticsService();
   //final _dynamicLinkService = DynamicLinkService();
@@ -155,7 +154,7 @@ class _WonderWordsState extends State<WonderWords> {
         ),
       ),
     );
-    
+
     /*
     //_openInitialDynamicLinkIfAny();
     

@@ -20,7 +20,7 @@ class ScreenViewObserver extends RoutemasterObserver {
     //Record the screen view event (once verified that the screen name
     // is non-null) by calling the setCurrentScreen predefined method.
     if (screenName != null) {
-      analyticsService.setCurrentScreen(screenName);
+      analyticsService.logCurrentScreen(screenName);
     }
   }
 

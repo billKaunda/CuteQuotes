@@ -25,7 +25,7 @@ dev_dependencies:
 flutter:
   generate: true
   assets:
-    - assets
+    - assets/
   fonts:
     - family: Fondamento
       fonts:

@@ -11,8 +11,8 @@ class AnalyticsService {
 
   //This method takes the screen name for a parameter and logs it into
   // the Firebase Analytics service
-  Future<void> setCurrentScreen(String screenName) {
-    return _analytics.setCurrentScreen(
+  Future<void> logCurrentScreen(String screenName) {
+    return _analytics.logScreenView(
       screenName: screenName,
     );
   }
@@ -21,7 +21,7 @@ class AnalyticsService {
   // Analytics Service
   Future<void> logEvent({
     required String name,
-    Map<String, Object?>? parameters,
+    Map<String, Object>? parameters,
   }) {
     return _analytics.logEvent(
       name: name,

@@ -67,12 +67,13 @@ void main() async {
             errorAndStackTrace.last,
           );
         }).sendPort,
+        
       );
 
-      HttpOverrides.global = WonderHttpOverrides();
+      HttpOverrides.global = CuteHttpOverrides();
 
       //Run the app with the initialized services.
-      runApp(WonderWords(
+      runApp(CuteQuotes(
         remoteValueService: remoteValueService,
       ));
     },
@@ -85,7 +86,7 @@ void main() async {
   );
 }
 
-class WonderHttpOverrides extends HttpOverrides {
+class CuteHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)

@@ -26,10 +26,15 @@ android {
     namespace = "com.example.cutequotes"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+    ndkVersion = "26.1.10909125"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
@@ -42,7 +47,7 @@ android {
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
         compileSdkVersion = 34
-        minSdkVersion = 23
+        minSdkVersion = 24
     }
 
     buildTypes {

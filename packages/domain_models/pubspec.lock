@@ -138,7 +138,7 @@ packages:
     source: hosted
     version: "0.7.1"
   lints:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: lints
       sha256: "976c774dd944a42e83e2467f4cc670daef7eed6295b10b36ae8c85bcbf828235"
@@ -306,7 +306,7 @@ packages:
     source: hosted
     version: "1.2.1"
   test:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: test
       sha256: "7ee44229615f8f642b68120165ae4c2a75fe77ae2065b1e55ae4711f6cf0899e"

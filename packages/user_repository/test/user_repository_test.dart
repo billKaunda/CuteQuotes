@@ -13,6 +13,7 @@ void main() {
     final userSecureStorage = MockUserSecureStorage();
     final keyValueStorage = KeyValueStorage();
 
+    //Initialize _userSecureStorage
     final userRepository = UserRepository(
       secureStorage: userSecureStorage,
       noSqlStorage: keyValueStorage,
@@ -36,6 +37,8 @@ void main() {
           userTokenSupplier: () => throw UserAuthRequiredFavQsException(),
         ),
       );
+      //Stub the behaviour of throwing UserAuthRequiredFavQsException for
+      // an unauthenticated user
       when(userSecureStorage.getToken())
           .thenThrow(UserAuthRequiredFavQsException());
 

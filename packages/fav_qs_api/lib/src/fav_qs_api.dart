@@ -114,10 +114,17 @@ class FavQsApi {
       return user;
     } catch (error) {
       final int userError = jsonObject[_errorCodeJsonKey];
-      if (userError == 21) {
-        throw InvalidCredentialsFavQsException();
+
+      switch (userError) {
+        case 21:
+          throw InvalidCredentialsFavQsException();
+        case 22:
+          throw AccountDeactivatedFavQsException();
+        case 23:
+          throw MissingUserInputFavQsException();
+        default:
+          rethrow;
       }
-      rethrow;
     }
   }
 

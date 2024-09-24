@@ -37,11 +37,7 @@ void main() {
         url,
         (server) => server.reply(
           200,
-          {
-            "User-Token": "token",
-            "login": "login",
-            "email": "email",
-          },
+          {"User-Token": "token", "login": "login", "email": "email"},
           delay: const Duration(seconds: 1),
         ),
         data: requestJsonBody,
@@ -70,6 +66,30 @@ void main() {
             server.throws(404, dioError, delay: const Duration(seconds: 1)),
         data: requestJsonBody,
       );
+      expect(() async => await remoteApi.signIn(email, password),
+          throwsA(isA<MockDioException>()));
+    });
+    test(
+        'When a user\'s account has been deactivated, throw a'
+        ' MockDioException', () async {
+      final requestOptions = RequestOptions(baseUrl: url);
+      final response = Response(
+          requestOptions: requestOptions,
+          statusCode: 404,
+          statusMessage: 'Account has been deactivated. Please contact '
+              'support@favqs.com');
+      final dioError = MockDioException(
+        requestOptions: requestOptions,
+        response: response,
+        type: DioExceptionType.cancel,
+      );
+
+      dioAdapter.onPost(
+          url,
+          (server) =>
+              server.throws(404, dioError, delay: const Duration(seconds: 1)),
+          data: requestJsonBody);
+
       expect(() async => await remoteApi.signIn(email, password),
           throwsA(isA<MockDioException>()));
     });

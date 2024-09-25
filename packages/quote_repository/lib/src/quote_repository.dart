@@ -129,7 +129,7 @@ class QuoteRepository {
           yield cachedPage.toDomainModel();
           return;
         }
-        //Since you've already emitted the cachedPage if the the policy
+        //Since you've already emitted the cachedPage if the policy
         // is cacheAndNetwork or cachePreferably earlier, if the network
         // call still fails, your only option now is tor rethrow the error.
         // This way, the state manager will handle it properly by showing
@@ -257,14 +257,16 @@ extension on Future<QuoteRM> {
     try {
       final updatedApiQuote = await this;
       final updatedCacheQuote = updatedApiQuote.toCacheModel();
-      await Future.wait([
-        localStorage.updateQuote(
-          updatedCacheQuote,
-          !shouldInvalidateFavoritesCache,
-        ),
-        if (shouldInvalidateFavoritesCache)
-          localStorage.clearQuoteListPageList(true)
-      ]);
+      await Future.wait(
+        [
+          localStorage.updateQuote(
+            updatedCacheQuote,
+            !shouldInvalidateFavoritesCache,
+          ),
+          if (shouldInvalidateFavoritesCache)
+            localStorage.clearQuoteListPageList(true)
+        ],
+      );
       return updatedCacheQuote;
     } catch (error) {
       if (error is UserAuthRequiredFavQsException) {

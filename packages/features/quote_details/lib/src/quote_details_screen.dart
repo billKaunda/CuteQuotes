@@ -53,6 +53,9 @@ class QuoteDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return StyledStatusBar.dark(
       child: BlocConsumer<QuoteDetailsCubit, QuoteDetailsState>(
+        // Biggest driver here is that a user has to be signed in to 
+        // perform actions on the _QuoteActionsAppBar such as upvoting 
+        // a quote or downvoting.
         listener: (context, state) {
           final quoteUpdateError =
               state is QuoteDetailsSuccess ? state.quoteUpdateError : null;
@@ -66,12 +69,22 @@ class QuoteDetailsView extends StatelessWidget {
               ..hideCurrentSnackBar()
               ..showSnackBar(snackBar);
 
+            // send the user to the sign-in screen by using the
+            // onAuthenticationError callback received in the constructor.
             if (quoteUpdateError is UserAuthenticationRequiredException) {
               onAuthenticationError();
             }
           }
         },
+        //Function of the builder property is just to return widgets, not 
+        // execute actions.
         builder: (context, state) {
+          //The PopScope widget allows you to intercept when the user tries
+          // to navigate back from the screen. This is used to send the
+          // current quote to the home screen if the current state is a 
+          // QuoteDetailsSuccess. This is done so as to inform the previous
+          // screen if the user has favourited or unfavourited that quote &
+          // reflect the changes accordingly
           return PopScope(
             onPopInvoked: (_) {
               final displayedQuote =
@@ -98,6 +111,11 @@ class QuoteDetailsView extends StatelessWidget {
                       : state is QuoteDetailsFailure
                           ? ExceptionIndicator(
                               onTryAgain: () {
+                                //BlocBuilder gives you that state object inside
+                                // the builder, but not the actual Cubit. To 
+                                // call a function or send an event to the 
+                                // cubit, you access the instance of the cubit
+                                // via context.read<CubitType>.
                                 final cubit = context.read<QuoteDetailsCubit>();
                                 cubit.refetch();
                               },
@@ -231,3 +249,11 @@ class _Quote extends StatelessWidget {
     );
   }
 }
+
+/*
+---Don't user BlocBuilder to display a snackbar or dialog to navigate 
+to another screen. Use a BlocListener instead.
+---As a UX rule of thumb, use an 'error state' widget to show errors
+that occured while retrieving information, and a snackbar or dialog to
+display errors that occured when sending information.
+*/

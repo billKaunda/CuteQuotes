@@ -5,11 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'quote_details_state.dart';
 
+//To create a cubit, you have to extend Cubit and specify your base
+// state class as the generic type.
 class QuoteDetailsCubit extends Cubit<QuoteDetailsState> {
   QuoteDetailsCubit({
     required this.quoteId,
     required this.quoteRepository,
   }) : super(
+          //You have to pass an instance of the initial state that
+          // will be provided to the UI when the screen first opens
           const QuoteDetailsInProgress(),
         ) {
     _fetchQuoteDetails();

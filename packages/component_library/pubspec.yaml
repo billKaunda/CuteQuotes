@@ -29,5 +29,5 @@ flutter:
   fonts:
     - family: Fondamento
       fonts:
-        - asset: assets/fondamento/Fondamento-Regular.ttf
-        - asset: assets/fondamento/Fondamento-Italic.ttf
+        - asset: assets/Fondamento-Regular.ttf
+        - asset: assets/Fondamento-Italic.ttf

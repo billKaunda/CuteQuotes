@@ -63,9 +63,7 @@ class QuoteListState extends Equatable {
   }) : this(
           filter: searchTerm.isEmpty
               ? null
-              : QuoteListFilterBySearchTerm(
-                  searchTerm,
-                ),
+              : QuoteListFilterBySearchTerm(searchTerm),
         );
   // Auxilliary constructor which helps in building the state for the
   // app when loading a filter by favorites
@@ -129,7 +127,7 @@ class QuoteListState extends Equatable {
       );
 
   //Auxilliary function which creates a copy of the current state
-  // by replacing just the [updateQuote]
+  // by replacing just the [updatedQuote]
   QuoteListState copyWithUpdatedQuote(
     Quote updatedQuote,
   ) =>
@@ -150,7 +148,9 @@ class QuoteListState extends Equatable {
 
   //Auxilliary function which creates a copy of the current state
   // with a new value for the [favoriteToggleError] property.
-  QuoteListState copyWithFavoriteToggleError(dynamic favoriteToggleError) =>
+  QuoteListState copyWithFavoriteToggleError(
+    dynamic favoriteToggleError,
+  ) =>
       QuoteListState(
         itemList: itemList,
         nextPage: nextPage,

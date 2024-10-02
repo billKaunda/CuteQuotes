@@ -15,16 +15,28 @@ part 'quote_list_event.dart';
 
 class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
   QuoteListBloc({
-    required this.userRepository,
-    required this.quoteRepository,
+    required UserRepository userRepository,
+    required QuoteRepository quoteRepository,
   })  : _quoteRepository = quoteRepository,
         super(
           const QuoteListState(),
         ) {
     _registerEventHandler();
 
+    //Watch the user's authentication status
+    // The getUser() function returns a Stream<User?> as it monitors the
+    // changes in the user's authentication status. When the user signs in,
+    // a new object comes down that channel, and when he signs out, you
+    // get a null value.
+    // You subscribe to the Stream using the listen() function which returns
+    // a subscription object which is stored in the _authChangesSubscription
+    // property
     _authChangesSubscription = userRepository.getUser().listen(
       (user) {
+        //Every time you get a new value from getUser() stream, you
+        //store the new username inside the _authenticatedUsername
+        // property. This allows you to read that value from other
+        // parts of your Bloc code.
         _authenticatedUsername = user?.username;
 
         add(
@@ -35,8 +47,7 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
   }
 
   late final StreamSubscription _authChangesSubscription;
-  final UserRepository userRepository;
-  final QuoteRepository _quoteRepository, quoteRepository;
+  final QuoteRepository _quoteRepository;
   String? _authenticatedUsername;
 
   void _registerEventHandler() {
@@ -441,7 +452,7 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
 
         //If error occured during a refresh request, notify the user
         //of it using a snackbar and if it is an unexpected error,
-        // just re-emit the current with an error added to it.
+        // just re-emit the current state with an error added to it.
         if (isRefresh) {
           yield state.copyWithNewRefreshError(
             error,
@@ -453,8 +464,9 @@ class QuoteListBloc extends Bloc<QuoteListEvent, QuoteListState> {
     }
   }
 
-  //Dispose the authChangesSubscription we created when
-  // the screen is closed
+  //Dispose the authChangesSubscription created when the screen
+  // is closed. It ensure that the subscription won't remain active
+  // after the user closes the screen
   @override
   Future<void> close() {
     _authChangesSubscription.cancel();

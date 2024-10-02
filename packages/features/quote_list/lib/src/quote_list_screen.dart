@@ -46,6 +46,7 @@ class QuoteListScreen extends StatelessWidget {
   }
 }
 
+@visibleForTesting
 class QuoteListView extends StatefulWidget {
   const QuoteListView({
     required this.onAuthenticationError,
@@ -73,7 +74,6 @@ class _QuoteListViewState extends State<QuoteListView> {
 
   @override
   void initState() {
-    super.initState();
     //Forward subsequent page requests to the bloc
     _pagingController.addPageRequestListener((pageNumber) {
       final isSubsequentPage = pageNumber > 1;
@@ -93,6 +93,8 @@ class _QuoteListViewState extends State<QuoteListView> {
         ),
       );
     });
+
+    super.initState();
   }
 
   @override
